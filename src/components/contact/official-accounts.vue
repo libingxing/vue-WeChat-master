@@ -9,13 +9,12 @@
                 <span>公众号</span>
             </div>
         </header>
-         <!--这里的 search 组件的样式也需要修改一下-->
         <search></search>
         <!--公众号集合-->
-        <template v-for="(value,key) in OfficialAccountsList">
+        <template v-for="(value,key) in OfficialAccountsList"  >
             <div class="weui-cells__title">{{key}}</div>
             <div class="weui-cells">
-                <div class="weui-cell weui-cell_access" v-for="item in value">
+                <div class="weui-cell weui-cell_access" v-for="item in value" @click="$router.push({path:'./official-accounts/official-content',query:{wxid:item.wxid}})">
                     <div class="weui-cell__hd">
                         <img :src="item.headerUrl" class="home__mini-avatar___1nSrW">
                     </div>
@@ -53,19 +52,19 @@
             },
             // 将公众号按照首字母分类
             OfficialAccountsList() {
-                var OfficialAccountsList = {},
+                var OfficialAccountsListObject = {},
                     OfficialAccounts = this.$store.state.OfficialAccounts,
                     max = OfficialAccounts.length;
                 for (var i = 0; i < this.initialList.length; i++) {
                     var protoTypeName = this.initialList[i]
-                    OfficialAccountsList[protoTypeName] = []
+                    OfficialAccountsListObject[protoTypeName] = []
                     for (var j = 0; j < max; j++) {
                         if (OfficialAccounts[j].initial === protoTypeName) {
-                            OfficialAccountsList[protoTypeName].push(OfficialAccounts[j])
+                            OfficialAccountsListObject[protoTypeName].push(OfficialAccounts[j])
                         }
                     }
                 }
-                return OfficialAccountsList
+                return OfficialAccountsListObject
             }
         }
 

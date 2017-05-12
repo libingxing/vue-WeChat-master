@@ -1,6 +1,7 @@
 <template>
     <!--朋友圈组件 后期开发的核心-->
-    <div id="moments">
+    <div id="moments"  @click="hideComment($event)">
+
         <header id="wx-header">
             <div class="center">
                 <router-link to="/explore" tag="div" class="iconfont icon-return-arrow">
@@ -9,6 +10,7 @@
                 <span>朋友圈</span>
             </div>
         </header>
+
         <div class="home-pic">
             <div class="home-pic-base">
                 <div class="top-pic">
@@ -19,6 +21,7 @@
                 <div class="top-name _ellipsis">阿荡</div>
             </div>
         </div>
+
         <div class="weui-cell moments__post">
             <div class="weui-cell__hd">
                 <img src="https://sinacloud.net/vue-wechat/images/headers/yehua.jpg">
@@ -57,10 +60,16 @@
                             <p class="actionBtn" id="btnComment"><i class="icon icon-3"></i></p>
                         </div>
                     </div>
-                    <span id="actionToggle" class="actionToggle">..</span>
+                    <span id="actionToggle" class="actionToggle" @click.stop.prevent="change" v-if="!this.fold">..</span>
+                    <span id="actionToggle2" class="actionToggle2" v-show="this.fold" @click.stop.prevent="startLikes">赞</span>
+                    <hr style="height:26px;width:1px;border-color:black;margin-top:1px;"  id="actionToggle4" class="actionToggle4" v-show="this.fold" />
+                    <span id="actionToggle3" class="actionToggle3" v-show="this.fold" @click.stop.prevent="startComment2">评论</span>
                 </div>
                 <!-- 赞／评论区 -->
                 <p class="liketext"><i class="icon icon-96"></i><span class="nickname">夜华</span>,<span class="nickname">孙尚香</span></p>
+                <input type="text" placeholder="评论" size="43" class="comment" id="comment" v-show="this.showComment" @keyup.13="show($event)" />
+                <div id="comments" v-show="this.commentContents" @click.stop.prevent="deleteComment"></div>
+                <div id="delete" v-show="this.deleteContents" @click.stop.prevent="confirmDelete">删除</div>
             </div>
             <!-- 结束 post -->
         </div>
@@ -111,6 +120,8 @@
             </div>
             <!-- 结束 post -->
         </div>
+
+
         <div class="weui-cell moments__post">
             <div class="weui-cell__hd">
                 <img src="https://sinacloud.net/vue-wechat/images/headers/yehua.jpg">
@@ -203,7 +214,60 @@
     import 'photoswipe/dist/photoswipe.css'
     import 'photoswipe/dist/default-skin/default-skin.css'
     export default {
+        data(){
+            return{
+                fold:false,   //显示隐藏点赞评论区
+                showComment:false,    //显示隐藏输入评论框
+                commentContents:false ,  //显示隐藏评论内容
+                deleteContents:false     //显示删除
+                  }
+        },
         methods: {
+            //显示点赞与评论
+            change(){
+                this.fold=true;
+         },
+            //隐藏点赞与评论
+            hideComment(e){
+                if(e.target.className!="actionToggle2"||(e.target.className!="actionToggle3")){
+                    this.fold=this.showComment=false;
+                }
+                if(e.target.className=="comment"){
+                    this.fold=this.showComment=true;
+                }
+         },
+            //开始点赞
+            startLikes(){
+                if(document.getElementById("actionToggle2").innerHTML=="赞"){
+                    document.getElementById("actionToggle2").innerHTML="取消"
+                }else{
+                    document.getElementById("actionToggle2").innerHTML="赞"
+                }
+         },
+            //开始评论
+            startComment2(){
+                this.showComment=true;
+         },
+            //当开始enter键时，完成评论内容输入
+            show(ev){
+                if(ev.keyCode == 13){
+                    var inputContent=document.getElementById("comment");
+                       this.fold=this.showComment=false;
+                       this.commentContents=true;
+                    document.getElementById("comments").innerHTML=inputContent.value;
+                }
+         },
+            //显示删除
+            deleteComment(){
+                this.deleteContents=true;
+         },
+            //删除评论
+            confirmDelete(){
+                document.getElementById("comments").innerHTML=document.getElementById("comment").value="";
+                this.deleteContents=false;
+                this.commentContents=false;
+
+        },
             initPhotoSwipeFromDOM(gallerySelector) {
                 var parseThumbnailElements = function (el) {
                     var thumbElements = el.childNodes,
@@ -353,4 +417,24 @@
 </script>
 <style>
     @import "../../assets/css/moments.css";
+
+    .comment{
+    width:100%;
+    height:26px;
+    border: 1px solid gray;
+    border-radius:5px;
+    }
+    #comments{
+    width:100%;
+    height:26px;
+    background-color: #f3f3f5;
+    color: #094dcc;
+    }
+    #delete{
+    width:100%;
+    height:26px;
+    font-weight:700;
+    background-color: #f3f3f5;
+    color: #094dcc;
+    }
 </style>

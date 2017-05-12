@@ -1,34 +1,62 @@
 <template>
-    <div class="dialogue">
+    <div class="dialogue" @click="hideMsgMore($event)">
         <header id="wx-header">
             <div class="other">
-                <router-link :to="{path:'/wechat/dialogue/dialogue-info',query: { msgInfo: msgInfo}}" tag="span" class="iconfont icon-chat-group" v-show="$route.query.group_num&&$route.query.group_num!=1"></router-link>
+
+                <!--群进入详情页-->
+                <router-link :to="{path:'/wechat/dialogue/dialogue-info',query: { msgInfo: msgInfo}}" tag="span" class="iconfont icon-chat-group" v-show="$route.query.group_num!=1"></router-link>
+
+                <!--非群进入详情页-->
                 <router-link :to="{path:'/wechat/dialogue/dialogue-detail',query: { msgInfo: msgInfo}}" tag="span" class="iconfont icon-chat-friends" v-show="$route.query.group_num==1"></router-link>
             </div>
+            
+            <!--对话框页面头部  to="/"表示路由跳转路径-->
             <div class="center">
-                <router-link to="/" tag="div" class="iconfont icon-return-arrow">
+                <div class="iconfont icon-return-arrow" @click.stop.prevent="$router.back()">
                     <span>微信</span>
-                </router-link>
+                </div>
                 <span>{{pageName}}</span>
-                <span class="parentheses" v-show='$route.query.group_num&&$route.query.group_num!=1'>{{$route.query.group_num}}</span>
+                <span class="parentheses" v-show='$route.query.group_num!=1'>
+                    {{$route.query.group_num}}
+                </span>
             </div>
         </header>
-        <section class="dialogue-section clearfix" v-on:click="MenuOutsideClick">
-            <div class="row clearfix" v-for="item in msgInfo.msg">
-                <img :src="item.headerUrl" class="header">
+
+            <!--对话页面内容-->
+        <section class="dialogue-section clearfix" >
+           
+           <!--来自好友对话信息-->
+            <div class="row clearfix" v-for="item in msgInfo.msg" v-show="$route.query.mid!='1'">
+                <img :src="item.headerUrl" class="header" @click="toPage($event)">
                 <p class="text" v-more>{{item.text}}</p>
             </div>
-            <span class="msg-more" id="msg-more"><ul>
+
+
+            <!--来自微信主人得消息-->
+            <div class="row clearfix" v-for="item in msgInfoOwner.msg" >
+                <img :src="item.headerUrl" class="header" @click="$router.push({path:'./details',query:{wxid:'wxid_zhaohd'}})" style="width:35px;float:right;margin-right:-80px;display:block">
+                <p class="text1" v-more >{{item.text}}</p>
+            </div>
+
+            <span class="msg-more" id="msg-more" >
+                <ul>
                     <li>复制</li>
                     <li>转发</li>
                     <li>收藏</li>
-                    <li>删除</li>
-                </ul></span>
+                    <li class="del">删除</li>
+                </ul>
+            </span>
         </section>
+
+        <!--对话页面底部-->
         <footer class="dialogue-footer">
             <div class="component-dialogue-bar-person">
-                <span class="iconfont icon-dialogue-jianpan" v-show="!currentChatWay" v-on:click="currentChatWay=true"></span>
-                <span class="iconfont icon-dialogue-voice" v-show="currentChatWay" v-on:click="currentChatWay=false"></span>
+
+                <!--点击实现voice按键-->
+                <span class="iconfont icon-dialogue-jianpan" v-show="!currentChatWay" @click.stop.prevent="currentChatWay=true"></span>
+                 
+                <!--点击取消voice按键-->
+                <span class="iconfont icon-dialogue-voice" v-show="currentChatWay" @click.stop.prevent="currentChatWay=false"></span>
                 <div class="chat-way" v-show="!currentChatWay">
                     <div class="chat-say" v-press>
                         <span class="one">按住 说话</span>
@@ -36,7 +64,7 @@
                     </div>
                 </div>
                 <div class="chat-way" v-show="currentChatWay">
-                    <input class="chat-txt" type="text" v-on:focus="focusIpt" v-on:blur="blurIpt"/>
+                    <input class="chat-txt" type="text" @keyup.13="addDialogueMessage($event)" id="chat-txt" />
                 </div>
                 <span class="expression iconfont icon-dialogue-smile"></span>
                 <span class="more iconfont icon-dialogue-jia"></span>
@@ -72,15 +100,8 @@
         data() {
             return {
                 pageName: this.$route.query.name,
-                currentChatWay: true, //ture为键盘打字 false为语音输入
-                timer: null
-                    // sayActive: false // false 键盘打字 true 语音输入
-            }
-        },
-        beforeRouteEnter(to, from, next) {
-            next(vm => {
-                vm.$store.commit("setPageName", vm.$route.query.name)
-            })
+                currentChatWay: false ,     //ture为键盘打字 false为语音输入
+                   }
         },
         computed: {
             msgInfo() {
@@ -89,40 +110,61 @@
                         return this.$store.state.msgList.baseMsg[i]
                     }
                 }
+            },
+            msgInfoOwner() {
+                for (var i in this.$store.state.msgList.baseMsg) {       
+                        return this.$store.state.msgList.baseMsg[0]
+                   }
             }
         },
         directives: {
             press: {
                 bind(element, binding) {
-                    // var recording = document.querySelector('.recording'),
-                    //     recordingVoice = document.querySelector('.recording-voice'),
-                    //     recordingCancel = document.querySelector('.recording-cancel'),
                     var startTx, startTy
                     element.addEventListener('touchstart', function(e) {
-                        // 为什么每次注册监听器,都要重新获取一次 DOM 像上面写就 undefine?
-                        var recording = document.querySelector('.recording'),
-                            recordingVoice = document.querySelector('.recording-voice')
-                        element.className = "chat-say say-active"
-                        recording.style.display = recordingVoice.style.display = "block"
-                            // console.log('start')
+
+                        var recording = document.querySelector('.recording')
+                        var recordingVoice = document.querySelector('.recording-voice')
+                        var recordingCancel = document.querySelector('.recording-cancel')
+                            recording.style.display = recordingVoice.style.display = recordingCancel.style.display = "block"
+
+                        //实现按住说话，松开结束
+                        var chatSay1 = document.querySelector('.one')
+                        var chatSay2 = document.querySelector('.two')
+                            chatSay1.style.display = 'none'
+                            chatSay2.style.display = 'block'
+
+                        element.className = "chat-say "     
                         var touches = e.touches[0]
                         startTx = touches.clientX
                         startTy = touches.clientY
                         e.preventDefault()
                     }, false)
+
                     element.addEventListener('touchend', function(e) {
-                        var recording = document.querySelector('.recording'),
-                            recordingVoice = document.querySelector('.recording-voice'),
-                            recordingCancel = document.querySelector('.recording-cancel')
+
+                        var recording = document.querySelector('.recording')
+                        var recordingVoice = document.querySelector('.recording-voice')
+                        var recordingCancel = document.querySelector('.recording-cancel')
+                            recordingCancel.style.display = recording.style.display = recordingVoice.style.display = "none"
+                        
+                        //实现按住说话，松开结束
+                        var chatSay1 = document.querySelector('.one')
+                        var chatSay2 = document.querySelector('.two')
+                            chatSay1.style.display = 'block'
+                            chatSay2.style.display = 'none'
+
                         element.className = "chat-say"
-                        recordingCancel.style.display = recording.style.display = recordingVoice.style.display = "none"
-                            // console.log('end')
+                       
                         e.preventDefault()
                     }, false)
+
                     element.addEventListener('touchmove', function(e) {
                         var recording = document.querySelector('.recording'),
                             recordingVoice = document.querySelector('.recording-voice'),
                             recordingCancel = document.querySelector('.recording-cancel')
+                            element.className = "chat-say"
+
                         var touches = e.changedTouches[0],
                             endTx = touches.clientX,
                             endTy = touches.clientY,
@@ -163,24 +205,38 @@
             }
         },
         methods: {
-            // 解决输入法被激活时 底部输入框被遮住问题
-            focusIpt() {
-                this.timer = setInterval(function() {
-                    document.body.scrollTop = document.body.scrollHeight
-                }, 100)
-            },
-            blurIpt() {
-                clearInterval(this.timer)
-            },
-            // 点击空白区域，菜单被隐藏
-            MenuOutsideClick(e) {
-                var container = document.querySelectorAll('.text'),
-                    msgMore = document.getElementById('msg-more')
-                if (e.target.className === 'text') {
-
-                } else {
-                    msgMore.style.display = 'none'
+             addDialogueMessage(ev){
+                if(ev.keyCode == 13){
+                    var inputContent=document.getElementById("chat-txt");
+                    this.$store.commit("addMessage",["1",inputContent.value]);
+                    inputContent.value="";
                 }
+            },
+            // 点击空白区域，菜单被隐藏;点击消息，菜单被显示
+            hideMsgMore(e) {
+                if((e.target.className!="msg-more")&&(e.target.className!="text1")&&e.target.className!="text"){
+                 document.getElementById("msg-more").style.display="none";
+               }
+            },
+
+            //只实现点击所有头像路由跳转个人主页面
+            toPage(e){
+                 for(var i=0;i<this.$store.state.msgList.baseMsg.length;i++){
+                 if(this.$store.state.msgList.baseMsg[i].mid==this.$route.query.mid){
+                       if(this.$route.query.group_num==1){
+                           this.$router.push({path:'./details',query:{wxid:this.$store.state.msgList.baseMsg[i].wxid}})
+                        }else if(this.$route.query.group_num!=1){
+                           var msgs= this.$store.state.msgList.baseMsg[i].msg;
+                           for(var j=0;j<msgs.length;j++){
+                               if(e.target.src==msgs[j].headerUrl){
+                                   this.$router.push({path:'./details',query:{wxid:msgs[j].href}})
+                               }
+                           }
+                        }else{
+                        }
+                    }
+                   
+                 }
             }
         }
     }
@@ -189,5 +245,26 @@
     @import "../../assets/css/dialogue.css";
     .say-active {
         background: #c6c7ca;
+    }
+    .dialogue-section .row .text1{
+        float:right;
+        background:#fff;
+        padding:8px;
+        box-sizing:border-box;
+        margin-right:-35px;
+        position:relative;
+        border-radius:4px;
+        max-width:80%;
+        font-size:14px;
+    }
+    .dialogue-section .row .text1:before{
+        width:0;
+        height:0;
+        position:absolute;
+        right:-13px;
+        top:11px;
+        content:"";
+        border:6px solid transparent;
+        border-left-color:#fff;
     }
 </style>

@@ -2,9 +2,9 @@
     <div class="profile">
         <header id="wx-header">
             <div class="center">
-                <router-link to="/contact" tag="div" class="iconfont icon-return-arrow">
+                <div tag="div" class="iconfont icon-return-arrow" @click="$router.back()">
                     <span>通讯录</span>
-                </router-link>
+                </div>
                 <span>详细资料</span>
             </div>
         </header>
@@ -24,7 +24,6 @@
                     <p>设置备注和标签</p>
                 </div>
                 <div class="weui-cell__ft">
-
                 </div>
             </div>
         </div>
@@ -57,7 +56,7 @@
             </div>
         </div>
 
-        <a href="javascript:;" class="weui-btn weui-btn_primary" style="width:90%;margin-top:20px;">发消息</a>
+        <a  @click="go" class="weui-btn weui-btn_primary" style="width:90%;margin-top:20px;">发消息</a>
         <a href="javascript:;" class="weui-btn weui-btn_default" style="width:90%">视频</a>
 
     </div>
@@ -73,7 +72,22 @@
         computed: {
             userInfo() {
                 return contact.getUserInfo(this.$route.query.wxid)
+            },
+            getUserInfo(){
+           for (var i in this.$store.state.msgList.baseMsg) {
+                    if(this.$store.state.msgList.baseMsg[i].wxid==this.$route.query.wxid){
+                       return this.$store.state.msgList.baseMsg[i]
+                    }
+                }
             }
+        },
+         mounted(){
+          //console.log(this.getUserInfo)
+        },
+        methods:{
+        go(){
+        this.$router.push({path:'./dialogue',query:{mid:this.getUserInfo.mid,name:this.getUserInfo.group_name||(this.getUserInfo.msg[0].name),group_num:this.getUserInfo.user.length}})
+        }
         }
     }
 </script>

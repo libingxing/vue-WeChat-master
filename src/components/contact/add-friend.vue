@@ -43,7 +43,7 @@
                 </div>
                 <div class="weui-cell__ft"></div>
             </a>
-            <a class="weui-cell weui-cell_access">
+            <a class="weui-cell weui-cell_access" @click="go">
                 <div class="weui-cell__hd"><img src="../../assets/images/contact_add-friend-contacts.png" alt=""></div>
                 <div class="weui-cell__bd">
                     <p>手机联系人</p>
@@ -63,7 +63,13 @@
     </div>
 </template>
 <script>
-    export default {}
+    export default {
+        methods:{
+            go(){
+                 this.$router.push({path:'./new-friends/mobile-contacts'})
+            }
+     }
+    }
 </script>
 <style>
     .add-friend .search-line {

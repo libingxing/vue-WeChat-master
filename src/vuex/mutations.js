@@ -23,6 +23,7 @@ const mutations = {
         if (status == -1) {
             state.tipsStatus = false
         } else {
+            //没有传入参数status或者status！=-1;
             state.tipsStatus = !state.tipsStatus
         }
     },
@@ -40,7 +41,29 @@ const mutations = {
     },
     //取消置顶消息 待完成
     cancelMsgStick(state, mid) {
+    },
+    //注意对象数组深复制;
+    //JSON.stringify将js=>json;
+    //JSON.parse将json=>js;
+    addMessage(state,arr){
+        for(var i=0;i<state.msgList.baseMsg.length;i++){
+            if(state.msgList.baseMsg[i].mid==arr[0]){
+                var array=[].concat(JSON.parse(JSON.stringify(state.msgList.baseMsg[i].msg)));
+                array[0].text=arr[1];
+                state.msgList.baseMsg[i].msg.push( array[0]);
+            }  
+        }
+      },    
+      //修改store中official-account信息    
+    addOfficailMessage(state,str){
+        var array=[];
+        for(var i=0;i<state.msgList.officialMsg.length;i++){
+                array=[].concat(JSON.parse(JSON.stringify(state.msgList.officialMsg[i])));
+            }  
+                array[0].text=str;
+                state.msgList.officialMsg.push( array[0]);
+        }         
+            
 
-    }
 }
 export default mutations

@@ -8,7 +8,7 @@
             <img src="https://sinacloud.net/vue-wechat/images/headers/header01.png" alt="" class="self-header">
           </div>
           <div class="weui-cell__bd">
-            <h4 class="self-nickname">阿荡</h4>
+            <h4 class="self-nickname">李炳星</h4>
 
             <p class="self-wxid">微信号: zhaohd</p>
           </div>

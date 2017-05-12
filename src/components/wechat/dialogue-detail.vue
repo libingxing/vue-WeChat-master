@@ -1,9 +1,8 @@
 <template>
     <div>
         <header id="wx-header">
-            <!--<div class="other"><span>添加朋友</span></div>-->
             <div class="center">
-                <div class="iconfont icon-return-arrow" v-on:click="$router.back()">
+                <div class="iconfont icon-return-arrow" @click="back">
                     <span>返回</span>
                 </div>
                 <span>聊天详情</span>
@@ -27,7 +26,8 @@
             </div>
             <div class="weui-cell weui-cell_switch">
                 <div class="weui-cell__bd">消息免打扰</div>
-                <div class="weui-cell__ft"><input type="checkbox" class="weui-switch"v-model="$route.query.msgInfo.quiet"></div>
+                <!--此处采用双向数据绑定,实现消息免打扰-->
+                <div class="weui-cell__ft"><input type="checkbox" class="weui-switch" v-model="$route.query.msgInfo.quiet"></div>
             </div>
         </div>
         <div class="weui-cells">
@@ -63,7 +63,12 @@
 <script>
     export default {
         mounted(){
-            console.log(this.$route.query.msgInfo)
+            //console.log(this.$route.query.msgInfo)
+        },
+        methods:{
+            back(){
+            this.$router.back();
+            }
         }
     }
 

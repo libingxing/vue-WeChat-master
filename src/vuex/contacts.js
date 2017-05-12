@@ -21,6 +21,7 @@ const contacts = [{ //昵称备注都有的朋友
         "remark": "阿荡",
         "signature": "填坑小能手",
         "telphone": 18896586152,
+        "distance":"300米以内",
         "album": [{
             imgSrc: ""
         }],
@@ -40,6 +41,7 @@ const contacts = [{ //昵称备注都有的朋友
         "remark": "",
         "signature": "青丘女帝，天族天妃",
         "telphone": 18896586152,
+        "distance":"400米以内",
         "album": [{
             imgSrc: "https://sinacloud.net/vue-wechat/images/album/baiqian/baiqian01.jpeg",
             date: 182625262
@@ -63,6 +65,8 @@ const contacts = [{ //昵称备注都有的朋友
         "remark": "夜华",
         "signature": "浅浅，过来",
         "telphone": 18896586152,
+        "distance":"500米以内",
+
         "album": [{
             imgSrc: "https://sinacloud.net/vue-wechat/images/album/guanyu/guanyu02.jpeg",
             date: 182625262
@@ -87,6 +91,8 @@ const contacts = [{ //昵称备注都有的朋友
         "remark": "刘备",
         "signature": "惟贤惟德，仁服于人",
         "telphone": 18896586152,
+        "distance":"300米以内",
+
         "album": [{
             imgSrc: "https://sinacloud.net/vue-wechat/images/album/guanyu/guanyu02.jpeg",
             date: 182625262
@@ -111,6 +117,7 @@ const contacts = [{ //昵称备注都有的朋友
         "remark": "关羽",
         "signature": "观尔乃插标卖首",
         "telphone": 18896586152,
+        "distance":"600米以内",
         "album": [{
             imgSrc: "https://sinacloud.net/vue-wechat/images/album/baiqian/baiqian02.jpeg",
             date: 182625262
@@ -135,6 +142,7 @@ const contacts = [{ //昵称备注都有的朋友
         "remark": "诸葛亮",
         "signature": "你可识得此阵？",
         "telphone": 18896586152,
+        "distance":"300米以内",
         "album": [{
             imgSrc: "https://sinacloud.net/vue-wechat/images/album/baiqian/baiqian01.jpeg",
             date: 182625262
@@ -159,6 +167,7 @@ const contacts = [{ //昵称备注都有的朋友
         "remark": "孙尚香2",
         "signature": "夫君,身体要紧~",
         "telphone": 18896586152,
+        "distance":"600米以内",
         "album": [{
             imgSrc: "https://sinacloud.net/vue-wechat/images/album/baiqian/baiqian02.jpeg",
             date: 182625262
@@ -180,6 +189,7 @@ const contacts = [{ //昵称备注都有的朋友
         "remark": "孙权",
         "signature": "容我三思",
         "telphone": 18896586152,
+        "distance":"700米以内",
         "album": [{
             imgSrc: "https://sinacloud.net/vue-wechat/images/album/guanyu/guanyu01.jpeg",
             date: 182625262
@@ -201,6 +211,7 @@ const contacts = [{ //昵称备注都有的朋友
         "remark": "黄月英",
         "signature": "哼哼~",
         "telphone": 18896586152,
+        "distance":"800米以内",
         "album": [{
             imgSrc: "https://sinacloud.net/vue-wechat/images/album/guanyu/guanyu02.jpeg",
             date: 182625262
@@ -221,6 +232,49 @@ const contacts = [{ //昵称备注都有的朋友
         "remark": "甄姬",
         "signature": "仿佛兮若轻云之蔽月",
         "telphone": 18896586152,
+        "distance":"900米以内",
+        "album": [{
+            imgSrc: "https://sinacloud.net/vue-wechat/images/album/guanyu/guanyu01.jpeg",
+            date: 182625262
+        }],
+        "area": ["魏", "荆州", "中山"],
+        "from": "通过手机号码添加",
+        "tag": "蜀",
+        "desc": {
+            "title": "",
+            "picUrl": ""
+        }
+    }, {
+        "wxid": "wxid_zhenji1",
+        "initial": 'z',
+        "headerUrl": "https://sinacloud.net/vue-wechat/images/headers/zhenji.jpg",
+        "nickname": "甄姬妹妹",
+        "sex": 0,
+        "remark": "甄姬妹妹",
+        "signature": "长叹息一眼七夕",
+        "telphone": 18896586152,
+        "distance":"1000米以内",
+        "album": [{
+            imgSrc: "https://sinacloud.net/vue-wechat/images/album/guanyu/guanyu01.jpeg",
+            date: 182625262
+        }],
+        "area": ["魏", "荆州", "中山"],
+        "from": "通过手机号码添加",
+        "tag": "蜀",
+        "desc": {
+            "title": "",
+            "picUrl": ""
+        }
+    }, {
+        "wxid": "wxid_zhenji2",
+        "initial": 'z',
+        "headerUrl": "https://sinacloud.net/vue-wechat/images/headers/zhenji.jpg",
+        "nickname": "甄姬姐姐",
+        "sex": 0,
+        "remark": "甄姬姐姐",
+        "signature": "醉翁之意不在酒",
+        "telphone": 18896586152,
+        "distance":"两公里以内",
         "album": [{
             imgSrc: "https://sinacloud.net/vue-wechat/images/album/guanyu/guanyu01.jpeg",
             date: 182625262
@@ -242,8 +296,10 @@ contact.getUserInfo = function(wxid) {
     if (!wxid) {
         return;
     } else {
+        //contacts是一个数组;
         for (var index in contacts) {
             if (contacts[index].wxid === wxid) {
+                //返回匹配到的数组第index项;
                 return contacts[index]
             }
         }

@@ -4,9 +4,16 @@
         <header id="wx-header">
             <div class="other"><span>添加朋友</span></div>
             <div class="center">
+
+            <!--如下是方法一实现路由跳转-->
+            <!--<div class="iconfont icon-return-arrow" @click="$router.back()">
+                    <span>通讯录</span>
+                </div>-->
+                
+            <!--方法二-->  
                 <router-link to="/contact" tag="div" class="iconfont icon-return-arrow">
                     <span>通讯录</span>
-                </router-link>
+                </router-link>  
                 <span>新的朋友</span>
             </div>
         </header>
@@ -46,7 +53,7 @@
                     <p><b>乌索普</b></p>
                     <p><span>来自账号查找</span></p>
                 </div>
-                <div class="weui-cell_ft"> <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary">接受</a> </div>
+                <div class="weui-cell_ft" > <a @click="change" class="weui-btn weui-btn_mini weui-btn_primary" >接受</a></div>
             </div>
         </div>
     </div>
@@ -61,6 +68,18 @@
             return {
                 pageName: "新的朋友"
             }
+        },
+        methods:{
+        change(){
+        var a = document.getElementsByClassName("weui-btn")[0];
+        if( a.innerHTML == "已添加"){
+        }else{
+        a.style.background = "none";
+        a.style.color = 'gray'
+        a.style.fontSize = '14px'
+        a.innerHTML = "已添加";
+             }
+         }
         }
     }
 </script>

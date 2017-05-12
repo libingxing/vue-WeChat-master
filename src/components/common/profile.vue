@@ -3,9 +3,9 @@
     <div class="profile">
         <header id="wx-header">
             <div class="center">
-                <router-link to="/self" tag="div" class="iconfont icon-return-arrow">
+                <div class="iconfont icon-return-arrow" @click="$router.back()">
                     <span>我</span>
-                </router-link>
+                </div>
                 <span>个人信息</span>
             </div>
         </header>
@@ -89,7 +89,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 <script>
