@@ -53,6 +53,20 @@ const mutations = {
                 state.msgList.baseMsg[i].msg.push( array[0]);
             }  
         }
+      },  
+      //添加群聊信息
+      addGroupMessage(state,arr){
+        for(var i=0;i<state.msgList.baseMsg.length;i++){
+            if(state.msgList.baseMsg[i].mid==arr[0]){
+                for(var j in state.msgList.baseMsg[i].msg){
+                    if(state.msgList.baseMsg[i].msg[j].href=="wxid_zhaohd"){
+                        var array=[].concat(JSON.parse(JSON.stringify(state.msgList.baseMsg[i].msg)));
+                        array[j].text=arr[1];
+                        state.msgList.baseMsg[i].msg.push( array[j]);
+                    }
+                }
+            }  
+        }
       },    
       //修改store中official-account信息    
     addOfficailMessage(state,str){

@@ -14,7 +14,7 @@
             </div>
         </header>
 
-        <div class="middle" style="height:45px;width:100%;margin-top:15px;color:gray;font-size:16px;"  >
+        <div class="middle" style="height:45px;width:100%;margin-top:15px;color:gray;font-size:16px;margin-top:45px;" >
             <span>&nbsp;&nbsp;&nbsp;说句话打声招呼</span>
         </div>
         <div class="inputWrapper" style="margin-top:-11px;">

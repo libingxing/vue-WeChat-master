@@ -10,7 +10,7 @@
                     <img src="../../assets/images/me_more-setting.png" style="display:block;float:right;width:23px;height:23px;margin-top:10px;">
                 </div>
             </header> 
-            <div class="_cover-content _effect" :class="{'_effect--30':decline}">
+            <div class="_cover-content _effect" :class="{'_effect--30':decline}" >
                 <div class="drift-bottle-panel">
                     <div class="mobile-hand"></div>
                 </div>

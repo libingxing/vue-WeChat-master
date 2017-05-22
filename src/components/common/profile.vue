@@ -9,7 +9,7 @@
                 <span>个人信息</span>
             </div>
         </header>
-        <div class="weui-cells">
+        <div class="weui-cells" style="margin-top:45px;">
             <div class="weui-cell" id="avatarCell">
                 <div class="weui-cell__bd">
                     <p>头像</p>

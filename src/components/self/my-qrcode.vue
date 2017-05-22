@@ -9,7 +9,7 @@
                 <span>我的二维码</span>
             </div>
         </header>
-        <section>
+        <section style="margin-top:45px;">
             <div class="clearfix">
                 <div class="header"><img src="https://sinacloud.net/vue-wechat/images/headers/header01.png" alt="" style="width:40px"></div>
                 <div class="info">

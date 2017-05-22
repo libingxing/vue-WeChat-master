@@ -67,6 +67,9 @@
                 if (toDepth === 3) {
                     this.leaveAnimate = "animated fadeOutRight"
                 }
+                if (toDepth === 4) {
+                    this.leaveAnimate = "animated fadeOutRight"
+                }
             }
         }
     }

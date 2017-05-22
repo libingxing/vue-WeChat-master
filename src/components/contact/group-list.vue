@@ -13,7 +13,7 @@
         <search></search>
         <section class="weui-cells">
             <template v-for="groupInfo in groupList">
-                <a class="weui-cell weui-cell_access" @click="$router.push({path:'./wechat/dialog',query:{mid:groupInfo.mid,name:groupInfo.group_name,group_num:groupInfo.user.length}})">
+                <a class="weui-cell weui-cell_access" @click="$router.push({path:'./dialogue',query:{mid:groupInfo.mid,name:groupInfo.group_name,group_num:groupInfo.user.length}})">
                     <div class="weui-cell__hd header-box">
                         <div class="header multi-header">
                             <img v-for="user in groupInfo.user" :src="user.headerUrl">

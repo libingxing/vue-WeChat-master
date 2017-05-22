@@ -9,7 +9,7 @@
                 <span>添加朋友</span>
             </div>
         </header>
-        <div class="search-line">
+        <div class="search-line" style="margin-top:45px;">
             <span class="iconfont icon-search"></span>
             <input type="text" placeholder="微信号/手机号">
         </div>

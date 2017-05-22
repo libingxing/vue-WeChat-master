@@ -7,17 +7,34 @@
                 <div class="iconfont icon-return-arrow" @click.stop.prevent="$router.back()">
                     <span>微信</span>
                 </div>
-                <span>{{pageName}}</span>
+                <span>{{this.$route.query.name}}</span>
                 <span class="parentheses" v-show='$route.query.group_num!=1'>
                     {{$route.query.group_num}}
                 </span>
+                <router-link  tag="span" class="iconfont icon-chat-friends" style="display:block;float:right;" :to="{path:'./dialogue/dialogue-detail',query: { msgInfo: msgInfo}}" ></router-link>
             </div>
         </header>
 
-    <!--对话页面内容-->
-        <section class="dialogue-section clearfix" @click="MenuOutsideClick"  >
+    <!--群聊页面-->
+        <section class="dialogue-section clearfix" @click="MenuOutsideClick"  style="margin-top:45px;" v-show="$route.query.group_num!='1'">
             <div class="row clearfix" v-for="item in msgInfo.msg" >
-                <img :src="item.headerUrl" class="header" @click="to" style="width:35px;float:right;margin-right:-80px;display:block">
+                <img :src="item.headerUrl" class="header" @click="to($event)" style="width:35px;float:right;margin-right:-80px;display:block">
+                <p class="text1" v-more>{{item.text}}</p>
+            </div>
+            <span class="msg-more" id="msg-more">
+                <ul>
+                    <li>复制</li>
+                    <li>转发</li>
+                    <li>收藏</li>
+                    <li>删除</li>
+                </ul>
+            </span>
+        </section>
+
+    <!--非群聊页面-->
+        <section class="dialogue-section clearfix" @click="MenuOutsideClick"  style="margin-top:45px;" v-show="$route.query.group_num=='1'">
+            <div class="row clearfix" v-for="item in msgInfoMsg.msg" >
+                <img :src="item.headerUrl" class="header" @click="to($event)" style="width:35px;float:right;margin-right:-80px;display:block">
                 <p class="text1" v-more>{{item.text}}</p>
             </div>
             <span class="msg-more" id="msg-more">
@@ -83,15 +100,22 @@
     export default {
         data() {
             return {
-                pageName: this.$route.query.name,
+                pageName: "",
                 currentChatWay: false     //ture为键盘打字 false为语音输入
                    }
         },
         computed: {
             msgInfo() {
                 for (var i in this.$store.state.msgList.baseMsg) {
+                    if (this.$store.state.msgList.baseMsg[i].mid == this.$route.query.mid) {
+                        return this.$store.state.msgList.baseMsg[i]
+                    }
+                   }
+            },
+             msgInfoMsg() {
+                for (var i in this.$store.state.msgList.baseMsg) {                  
                         return this.$store.state.msgList.baseMsg[0]
-                }
+                   }
             }
         },
         directives: {
@@ -184,8 +208,15 @@
             show(ev){
                 if(ev.keyCode == 13){
                     var inputContent=document.getElementById("chat-txt");
-                    this.$store.commit("addMessage",["1",inputContent.value]);
-                    inputContent.value="";
+                    if(this.$route.query.group_num=="1"){
+                        this.$store.commit("addMessage",['1',inputContent.value]);
+                        inputContent.value="";
+                    }
+                    if(this.$route.query.group_num!="1"){
+                        this.$store.commit("addGroupMessage",[this.$route.query.mid,inputContent.value]);
+                        inputContent.value="";
+                    }
+                    
                 }
             },
             // 点击空白区域，菜单被隐藏;点击消息，菜单被显示
@@ -198,8 +229,12 @@
                 }
             },
             //只实现点击所有头像路由跳转个人主页面---此处未完成
-            to(){
-                this.$router.push({path:'./details',query:{wxid:'wxid_zhaohd'}})
+            to(e){
+                 for(var i in this.msgInfo.msg){
+                    if(this.msgInfo.msg[i].headerUrl==e.target.src){
+                     this.$router.push({path:'./details',query:{wxid:this.msgInfo.msg[i].href}})
+                    }
+                 }
             }    
         }
     }

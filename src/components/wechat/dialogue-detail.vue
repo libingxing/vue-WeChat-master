@@ -8,7 +8,7 @@
                 <span>聊天详情</span>
             </div>
         </header>
-        <div class="member">
+        <div class="member" style="margin-top:45px;">
             <ul class="chat-dialogue-entry-collect">
                 <li v-for="item in $route.query.msgInfo.user">
                     <div><img :src="item.headerUrl"></div>

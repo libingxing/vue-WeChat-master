@@ -39,6 +39,7 @@ const state = {
                 "wxid": "wxid_zhaohd",
                 "quiet": false, // true：消息免打扰 false：提示此好友/群的新消息
                 "mes":"知心爱人",
+                "distance":"300",
                 "msg": [{ //对话框的聊天记录 新消息 push 进
                     "text": "点击这些白色框消息，唤醒消息操作菜单，点击这些白色框消息，唤醒消息操作菜单",
                     "date": 1488117964495,
@@ -134,6 +135,7 @@ const state = {
                 "wxid": "wxid_sunquan",
                 "quiet": false,
                 "mes":"年年有余",
+                "distance":"400",
                 "msg": [{
                     "text": "点击消息，唤醒消息操作菜单",
                     "date": 1488117964495,
@@ -162,6 +164,7 @@ const state = {
                 "wxid": "wxid_sunshangxiang",
                 "quiet": false,
                 "mes":"不愿错过你",
+                "distance":"500",
                 "msg": [{
                     "text": '夫君,身体要紧~ ',
                     "date": 1488117964495,
@@ -180,6 +183,7 @@ const state = {
                 "wxid": "wxid_guangyu",
                 "quiet": true,
                 "mes":"一切从繁入简",
+                "distance":"600",
                 "msg": [{
                     "text": '三姓家奴！ ',
                     "date": 1488117964495,
@@ -198,6 +202,7 @@ const state = {
                 "wxid": "wxid_baiqian",
                 "quiet": true,
                 "mes":"握不住的沙，不如扬了它",
+                "distance":"700",
                 "msg": [{
                     "text": '我是白浅！ ',
                     "date": 1488117964495,
@@ -216,6 +221,7 @@ const state = {
                 "wxid": "wxid_huangyueying",
                 "quiet": true,
                 "mes":"简单的生活，简单的人",
+                "distance":"800",
                 "msg": [{
                     "text": '我是黄月英！ ',
                     "date": 1488117964495,
@@ -234,6 +240,7 @@ const state = {
                 "wxid": "wxid_liubei",
                 "quiet": false,
                 "mes":"大家好，欢迎来吃饭",
+                "distance":"900",
                 "msg": [{
                     "text": '我是刘备！ ',
                     "date": 1488117964495,
@@ -252,6 +259,7 @@ const state = {
                 "wxid": "wxid_yehua",
                 "quiet": true,
                 "mes":"我是微商",
+                "distance":"1000",
                 "msg": [{
                     "text": '我是叶华！ ',
                     "date": 1488117964495,
@@ -270,6 +278,7 @@ const state = {
                 "wxid": "wxid_zhugeliang",
                 "quiet": false,
                 "mes":"我是诸葛亮在世",
+                "distance":"1100",
                 "msg": [{
                     "text": '我是诸葛亮在世！ ',
                     "date": 1488117964495,
@@ -288,6 +297,7 @@ const state = {
                 "wxid": "wxid_zhenji",
                 "quiet": false,
                 "mes":"你的健康，我们的追求",
+                "distance":"1200",
                 "msg": [{
                     "text": '我是甄姬！ ',
                     "date": 1488117964495,
@@ -295,42 +305,6 @@ const state = {
                     "headerUrl": "https://sinacloud.net/vue-wechat/images/headers/zhenji.jpg"
                 }],
                 "user": [contact.getUserInfo('wxid_zhenji')]
-            },
-            {
-                "mid": 13,
-                "type": "friend",
-                "group_name": "",
-                "group_qrCode": "",
-                "read": false,
-                "newMsgCount": 1,
-                "wxid": "wxid_zhenji1",
-                "quiet": false,
-                "mes":"大家好，我是甄姬妹妹",
-                "msg": [{
-                    "text": '我是甄姬妹妹！ ',
-                    "date": 1488117964495,
-                    "name": "甄姬妹妹",
-                    "headerUrl": "https://sinacloud.net/vue-wechat/images/headers/zhenji.jpg"
-                }],
-                "user": [contact.getUserInfo('wxid_zhenji1')]
-            },
-            {
-                "mid": 14,
-                "type": "friend",
-                "group_name": "",
-                "group_qrCode": "",
-                "read": true,
-                "newMsgCount": 0,
-                "wxid": "wxid_zhenji2",
-                "quiet": true,
-                "mes":"大家好，我是甄姬姐姐",
-                "msg": [{
-                    "text": '我是甄姬姐姐！ ',
-                    "date": 1488117964495,
-                    "name": "甄姬姐姐",
-                    "headerUrl": "https://sinacloud.net/vue-wechat/images/headers/zhenji.jpg"
-                }],
-                "user": [contact.getUserInfo('wxid_zhenji2')]
             }
         ],
     officialMsg:[{

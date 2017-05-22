@@ -10,7 +10,7 @@
                     <span style="display:block;float:right;" v-show="this.title=='二维码/条码'">相册</span>
                 </div>
             </header> 
-            <div class="_cover-content _effect" :class="{'_effect--30':decline}">
+            <div class="_cover-content _effect" :class="{'_effect--30':decline}" >
                 <div class="sao-yi-sao-panel">
                     <div :class="menu[current].type">
                         <div class="frame">

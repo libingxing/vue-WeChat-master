@@ -8,7 +8,7 @@
                 <span>{{officialInfo.name}}</span>
             </div>
         </header>
-        <div class="weui-cells">
+        <div class="weui-cells" style="margin-top:45px;">
             <div class="weui-cell">
                 <div class="weui-cell__hd"><img :src="officialInfo.headerUrl" alt="" class="self-header" style="width:60px"></div>
                 <div class="weui-cell__bd">

@@ -1,21 +1,21 @@
 <template>
     <!--微信组件-->
-  <div id="wechat">
+  <div id="wechat" >
        <header id="wx-header">
             <div class="center">
                 <div class="iconfont icon-return-arrow" @click="$router.back()">
                     <span>发现</span>
                 </div>
                  <span>附近的人</span>
+                 <span class="gender gender-female"></span>
                  <span style="display:block;float:right;" @click="show">  ...   </span>
             </div>
         </header>
-    <ul class="wechat-list">
+    <ul class="wechat-list" style="margin-top:45px;">
         <!--props传递消息对象 baseMsgObj  使用is扩展组件 -->
         <li is="msg-item" v-for="baseMsgObj in $store.state.msgList.baseMsg"  class="list-row line-bottom" :item="baseMsgObj">
         </li>
     </ul>
-
 
     <ul id="choose" class="choose" v-show="this.showChoose" @click="choose($event)">
        <li>只看女生</li>
@@ -26,6 +26,7 @@
        <li class="cancel">取消</li>
     </ul>
 
+    
   </div>
 </template>
 <script>
@@ -72,7 +73,7 @@
     width: 100%;
     height: 250px;
     z-index: 20;
-    margin-top: 296px;
+    margin-top: 236px;
     }
     .choose li{
     width: 100%;
@@ -83,5 +84,5 @@
     font-size: 16px;
     border-bottom: 1px solid gray;
     line-height: 40px;
-    }
+    }    
 </style>

@@ -26,14 +26,14 @@
         <section class="dialogue-section clearfix" >
            
            <!--来自好友对话信息-->
-            <div class="row clearfix" v-for="item in msgInfo.msg" v-show="$route.query.mid!='1'">
+            <div class="row clearfix" v-for="item in msgInfo.msg" v-show="$route.query.mid!='1'" style="margin-top:45px;">
                 <img :src="item.headerUrl" class="header" @click="toPage($event)">
                 <p class="text" v-more>{{item.text}}</p>
             </div>
 
 
             <!--来自微信主人得消息-->
-            <div class="row clearfix" v-for="item in msgInfoOwner.msg" >
+            <div class="row clearfix" v-for="item in msgInfoOwner.msg" style="margin-top:45px;">
                 <img :src="item.headerUrl" class="header" @click="$router.push({path:'./details',query:{wxid:'wxid_zhaohd'}})" style="width:35px;float:right;margin-right:-80px;display:block">
                 <p class="text1" v-more >{{item.text}}</p>
             </div>

@@ -26,6 +26,7 @@
           <div class="weui-cell__bd">
             扫一扫
           </div>
+          <div class="weui-cell__ft"></div>
         </div>
         <div class="weui-cell weui-cell_access" @click.stop.prevent="$router.push({path:'./explore/yaoyiyao'})">
           <div class="weui-cell__hd">
@@ -34,6 +35,7 @@
           <div class="weui-cell__bd">
             摇一摇
           </div>
+          <div class="weui-cell__ft"></div>
         </div>
       </div>
 
@@ -45,6 +47,7 @@
           <div class="weui-cell__bd">
             附近的人
           </div>
+          <div class="weui-cell__ft"></div>
         </div>
 
         <div class="weui-cell weui-cell_access" @click.stop.prevent="$router.push({path:'./explore/piaoliupin'})">
@@ -54,6 +57,7 @@
           <div class="weui-cell__bd">
             漂流瓶
           </div>
+          <div class="weui-cell__ft"></div>
         </div>
       </div>
 
@@ -65,6 +69,7 @@
           <div class="weui-cell__bd">
             购物
           </div>
+          <div class="weui-cell__ft"></div>
         </a>
         <a  href="http://khd.koiyhh.com/" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
@@ -73,8 +78,23 @@
           <div class="weui-cell__bd">
             游戏
           </div>
+          <div class="weui-cell__ft"></div>
         </a>
       </div>
+
+      <div class="weui-cells">
+        <a href="http://wq.jd.com" class="weui-cell weui-cell_access">
+          <div class="weui-cell__hd">
+            <img src="../../assets/images/find_icon-shopping.png">
+          </div>
+          <div class="weui-cell__bd">
+            小程序
+          </div>
+          <div class="weui-cell__ft"></div>
+        </a>
+      </div>
+
+
     </section>
   </div>
 </template>

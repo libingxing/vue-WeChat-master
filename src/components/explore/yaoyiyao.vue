@@ -1,16 +1,16 @@
 <template>
     <div class="_full_router component-yao-yi-yao">
         <div class="_full_inner">
-            <header id="wx-header">
+            <header id="wx-header" >
                 <div class="center">
                     <router-link to="/explore" tag="div" class="iconfont icon-return-arrow">
                         <span>发现</span>
                     </router-link>
                     <span>摇一摇</span>
-                    <img src="../../assets/images/me_more-setting.png" style="display:block;float:right;width:23px;height:23px;margin-top:10px;">
+                    <img src="../../assets/images/me_more-setting.png" style="display:block;float:right;width:23px;height:23px;margin-top:10px;" @click="$router.push({path:'./yaoyiyao/setting'})">
                 </div>
             </header> 
-            <div class="_cover-content _effect" :class="{'_effect--30':decline}">
+            <div class="_cover-content _effect" :class="{'_effect--30':decline}" >
                 <div class="yao-yi-yao-panel">
                     <div class="mobile-hand"></div>
                 </div>
@@ -67,14 +67,14 @@ export default {
 }
 
 .yao-yi-yao-panel {
-    height: calc(100% - 90px);
+    height:100%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 .yao-yi-yao-panel .mobile-hand{
-    margin-top: -20%;
+    margin-top: -10%;
     width: 50%;
     padding-top: 187%;
     background-image: url(../../assets/images/yao-yi-yao/mobile-hand.png);

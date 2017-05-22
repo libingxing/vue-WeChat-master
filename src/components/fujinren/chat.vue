@@ -8,7 +8,7 @@
                 <span>详细资料</span>
             </div>
         </header>
-        <div class="weui-cells">
+        <div class="weui-cells" style="margin-top:45px;">
             <div class="weui-cell">
                 <div class="weui-cell__hd"><img :src="userInfo.headerUrl" alt="" class="self-header" style="width:60px"></div>
                 <div class="weui-cell__bd">

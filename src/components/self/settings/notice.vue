@@ -9,23 +9,27 @@
                 <span>新消息通知</span>
             </div>
         </header>
-        <section>
+        <section style="margin-top:45px;">
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">接收新消息通知</div>
-                    <div class="weui-cell__ft">已开启</div>
+                    <div class="weui-cell__ft">
+                        <input type="checkbox" class="weui-switch" checked="true">
+                    </div>
                 </div>
             </div>
             <div class="weui-cells__tips">如果你要关闭或开启微信的新消息通知,请在 iPhone 的"设置"——"通知"功能中, 找到应用程序"微信"更改.</div>
             <div class="weui-cells">
                 <div class="weui-cell weui-cell_switch">
                     <div class="weui-cell__bd">通知显示消息详情</div>
-                    <div class="weui-cell__ft"><input type="checkbox" class="weui-switch"></div>
+                    <div class="weui-cell__ft">
+                        <input type="checkbox" class="weui-switch" checked="true">
+                    </div>
                 </div>
             </div>
             <div class="weui-cells__tips">关闭后, 当收到微信消息时, 通知提示将不显示发信人和内容摘要.</div>
             <div class="weui-cells">
-                <div class="weui-cell">
+                <div class="weui-cell weui-cell_access" @click="$router.push('./notice/stopFuncMes')">
                     <div class="weui-cell__bd">功能消息免打扰</div>
                     <div class="weui-cell__ft"></div>
                 </div>

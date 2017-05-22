@@ -8,7 +8,7 @@
                 <span>详细资料</span>
             </div>
         </header>
-        <div class="weui-cells">
+        <div class="weui-cells" style="margin-top:45px;" >
             <div class="weui-cell">
                 <div class="weui-cell__hd"><img :src="userInfo.headerUrl" alt="" class="self-header" style="width:60px"></div>
                 <div class="weui-cell__bd">
@@ -86,7 +86,11 @@
         },
         methods:{
         go(){
-        this.$router.push({path:'./dialogue',query:{mid:this.getUserInfo.mid,name:this.getUserInfo.group_name||(this.getUserInfo.msg[0].name),group_num:this.getUserInfo.user.length}})
+            for (var i in this.$store.state.msgList.baseMsg) {
+                    if(this.$store.state.msgList.baseMsg[i].wxid==this.$route.query.wxid){
+                     this.$router.push({path:'./dialogue',query:{mid:this.$store.state.msgList.baseMsg[i].mid,name:this.$store.state.msgList.baseMsg[i].msg[0].name,group_num:this.$store.state.msgList.baseMsg[i].user.length}}) 
+                    }
+                }
         }
         }
     }

@@ -11,7 +11,7 @@
             </div>
         </header>
 
-        <div class="home-pic">
+        <div class="home-pic" style="margin-top:45px;">
             <div class="home-pic-base">
                 <div class="top-pic">
                     <div class="top-pic-inner">

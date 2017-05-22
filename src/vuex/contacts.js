@@ -244,48 +244,6 @@ const contacts = [{ //昵称备注都有的朋友
             "title": "",
             "picUrl": ""
         }
-    }, {
-        "wxid": "wxid_zhenji1",
-        "initial": 'z',
-        "headerUrl": "https://sinacloud.net/vue-wechat/images/headers/zhenji.jpg",
-        "nickname": "甄姬妹妹",
-        "sex": 0,
-        "remark": "甄姬妹妹",
-        "signature": "长叹息一眼七夕",
-        "telphone": 18896586152,
-        "distance":"1000米以内",
-        "album": [{
-            imgSrc: "https://sinacloud.net/vue-wechat/images/album/guanyu/guanyu01.jpeg",
-            date: 182625262
-        }],
-        "area": ["魏", "荆州", "中山"],
-        "from": "通过手机号码添加",
-        "tag": "蜀",
-        "desc": {
-            "title": "",
-            "picUrl": ""
-        }
-    }, {
-        "wxid": "wxid_zhenji2",
-        "initial": 'z',
-        "headerUrl": "https://sinacloud.net/vue-wechat/images/headers/zhenji.jpg",
-        "nickname": "甄姬姐姐",
-        "sex": 0,
-        "remark": "甄姬姐姐",
-        "signature": "醉翁之意不在酒",
-        "telphone": 18896586152,
-        "distance":"两公里以内",
-        "album": [{
-            imgSrc: "https://sinacloud.net/vue-wechat/images/album/guanyu/guanyu01.jpeg",
-            date: 182625262
-        }],
-        "area": ["魏", "荆州", "中山"],
-        "from": "通过手机号码添加",
-        "tag": "蜀",
-        "desc": {
-            "title": "",
-            "picUrl": ""
-        }
     }
 ]
 

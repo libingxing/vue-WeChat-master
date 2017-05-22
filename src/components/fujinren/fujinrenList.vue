@@ -3,7 +3,6 @@
     <li v-if="item.user.length==1">
      <router-link :to="{ path: '/fujinren/chat', query: { wxid:item.wxid} }" tag="div" class="list-info" >
             <div class="header-box">             
-                <!--如果是私聊，只显示一个头像； 如果是群聊，则显示多个头像，flex 控制样式-->
                 <div class="header" :class="[item.type=='group'?'multi-header':'']">
                     <!--此处用法user甚好-->
                     <img v-for="userInfo in item.user" :src="userInfo.headerUrl">
@@ -16,7 +15,8 @@
                 <!--显示群名字-->
                 <div class="desc-author" v-if="item.type=='group'">{{item.group_name}}</div>
                 <!--如果没有备注好友，则显示微信昵称-->
-                <div class="desc-author" v-else>{{item.msg[0].name}}</div>            
+                <div class="desc-author" v-else>{{item.msg[0].name}}</div>  
+                <span style="color:gray;">{{item.distance}}米以内</span>          
             </div>
         </router-link>
     </li>
