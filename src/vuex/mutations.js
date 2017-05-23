@@ -42,6 +42,7 @@ const mutations = {
     //取消置顶消息 待完成
     cancelMsgStick(state, mid) {
     },
+    //添加个人消息
     //注意对象数组深复制;
     //JSON.stringify将js=>json;
     //JSON.parse将json=>js;
@@ -53,7 +54,21 @@ const mutations = {
                 state.msgList.baseMsg[i].msg.push( array[0]);
             }  
         }
-      },  
+      }, 
+      //删除个人消息
+      delMessage(state,arr){
+        for(var i=0;i<state.msgList.baseMsg.length;i++){
+            if(state.msgList.baseMsg[i].mid==arr[0]){
+                var array=[].concat(JSON.parse(JSON.stringify(state.msgList.baseMsg[i].msg)));  
+                    for(var j in array){
+                        if(array[j].text==arr[1]){
+                            array[j].text="";
+                            state.msgList.baseMsg[i].msg.splice( j,1);
+                        }
+                    }        
+            }  
+        }
+      },   
       //添加群聊信息
       addGroupMessage(state,arr){
         for(var i=0;i<state.msgList.baseMsg.length;i++){

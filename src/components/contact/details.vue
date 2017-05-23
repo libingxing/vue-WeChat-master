@@ -88,7 +88,11 @@
         go(){
             for (var i in this.$store.state.msgList.baseMsg) {
                     if(this.$store.state.msgList.baseMsg[i].wxid==this.$route.query.wxid){
-                     this.$router.push({path:'./dialogue',query:{mid:this.$store.state.msgList.baseMsg[i].mid,name:this.$store.state.msgList.baseMsg[i].msg[0].name,group_num:this.$store.state.msgList.baseMsg[i].user.length}}) 
+                        if(this.$route.path.indexOf('dialogue')>'0'){
+                         this.$router.push({path:'./',query:{mid:this.$store.state.msgList.baseMsg[i].mid,name:this.$store.state.msgList.baseMsg[i].msg[0].name,group_num:this.$store.state.msgList.baseMsg[i].user.length}}) 
+                        }else{
+                          this.$router.push({path:'./dialogue',query:{mid:this.$store.state.msgList.baseMsg[i].mid,name:this.$store.state.msgList.baseMsg[i].msg[0].name,group_num:this.$store.state.msgList.baseMsg[i].user.length}}) 
+                        }
                     }
                 }
         }

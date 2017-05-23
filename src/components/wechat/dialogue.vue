@@ -26,16 +26,16 @@
         <section class="dialogue-section clearfix" >
            
            <!--来自好友对话信息-->
-            <div class="row clearfix" v-for="item in msgInfo.msg" v-show="$route.query.mid!='1'" style="margin-top:45px;">
+            <div class="row clearfix" v-for="item in msgInfo.msg" v-show="$route.query.mid!='1'" style="margin-top:65px;">
                 <img :src="item.headerUrl" class="header" @click="toPage($event)">
                 <p class="text" v-more>{{item.text}}</p>
             </div>
 
 
             <!--来自微信主人得消息-->
-            <div class="row clearfix" v-for="item in msgInfoOwner.msg" style="margin-top:45px;">
+            <div class="row clearfix" v-for="item in msgInfoOwner.msg" style="margin-top:65px;">
                 <img :src="item.headerUrl" class="header" @click="$router.push({path:'./details',query:{wxid:'wxid_zhaohd'}})" style="width:35px;float:right;margin-right:-80px;display:block">
-                <p class="text1" v-more >{{item.text}}</p>
+                <p class="text1" v-more  id="text1" >{{item.text}}</p>
             </div>
 
             <span class="msg-more" id="msg-more" >
@@ -43,7 +43,7 @@
                     <li>复制</li>
                     <li>转发</li>
                     <li>收藏</li>
-                    <li class="del">删除</li>
+                    <li class="del"  @click="delMes($event)">删除</li>
                 </ul>
             </span>
         </section>
@@ -237,6 +237,21 @@
                     }
                    
                  }
+            },
+            delMes(e){
+                    var arr=document.getElementsByClassName('text1');
+                    for(var i=0;i<arr.length;i++){                  
+                        if(((arr[i].offsetTop-e.clientY)<30)&&(arr[i].offsetTop-e.clientY)>0){
+                            this.$store.commit("delMessage",["1",arr[i].innerHTML]);
+                        }                      
+                    }
+                    var array=document.getElementsByClassName('text');
+                    for(var i=0;i<array.length;i++){                  
+                        if(((array[i].offsetTop-e.clientY)<30)&&(array[i].offsetTop-e.clientY)>0){
+                            this.$store.commit("delMessage",[this.$route.query.mid,array[i].innerHTML]);
+
+                        }                      
+                    }
             }
         }
     }

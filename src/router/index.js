@@ -118,6 +118,13 @@ const routes = [{
         }
     },
     {
+        path: '/contact/dialogue/details',
+        name: "",
+        components: {
+            "subPage": resolve => require(["../components/contact/details.vue"], resolve)
+        }
+    },
+    {
       path: '/contact/dialogue',
       name: '',
       components: {

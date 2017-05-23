@@ -2,7 +2,7 @@
     <div>
         <header id="wx-header">
             <div class="center">
-                <div class="iconfont icon-return-arrow" @click="back">
+                <div class="iconfont icon-return-arrow" @click="$router.back()">
                     <span>返回</span>
                 </div>
                 <span>聊天详情</span>
@@ -10,7 +10,7 @@
         </header>
         <div class="member" style="margin-top:45px;">
             <ul class="chat-dialogue-entry-collect">
-                <li v-for="item in $route.query.msgInfo.user">
+                <li v-for="item in $route.query.msgInfo.user" @click="goDialogue($event)">
                     <div><img :src="item.headerUrl"></div>
                     <p>{{item.remark||item.nickname}}</p> 
                 </li>
@@ -63,8 +63,14 @@
 <script>
     export default {
         methods:{
-            back(){
-            this.$router.back();
+            goDialogue(e){
+               for(var i in this.$store.state.msgList.baseMsg){
+                  for(var j in this.$store.state.msgList.baseMsg[i].msg){
+                       if((this.$store.state.msgList.baseMsg[i].msg[j].headerUrl==e.target.src)&&this.$store. state.msgList.baseMsg[i].group_name!=""){
+                          this.$router.push({path:'./details',query:{wxid:this.$store.state.msgList.baseMsg[i].msg[j].href}});
+                      }
+                  }
+               }
             }
         }
     }

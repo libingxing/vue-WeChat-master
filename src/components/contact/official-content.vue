@@ -13,8 +13,8 @@
                 </div>
             </header> 
             <div class="_cover-content _effect" :class="{'_effect--30':decline}">
-                <section class="dialogue-section">
-                    <div class="row clearfix" v-for="item in msgInfo" v-show="item.text!=''">
+                <section class="dialogue-section" >
+                    <div class="row clearfix" v-for="item in msgInfo" v-show="item.text!=''" style="margin-top:45px;">
                 <img :src="item.headerUrl" class="header" style="width:35px;float:right;margin-right:-80px;display:block">
                 <p class="text1" v-more>{{item.text}}</p>
             </div>

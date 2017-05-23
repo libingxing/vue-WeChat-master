@@ -26,7 +26,7 @@
                     <li>复制</li>
                     <li>转发</li>
                     <li>收藏</li>
-                    <li>删除</li>
+                    <li class="del"  @click="delMes($event)" >删除</li>
                 </ul>
             </span>
         </section>
@@ -35,14 +35,14 @@
         <section class="dialogue-section clearfix" @click="MenuOutsideClick"  style="margin-top:45px;" v-show="$route.query.group_num=='1'">
             <div class="row clearfix" v-for="item in msgInfoMsg.msg" >
                 <img :src="item.headerUrl" class="header" @click="to($event)" style="width:35px;float:right;margin-right:-80px;display:block">
-                <p class="text1" v-more>{{item.text}}</p>
+                <p class="text1" v-more1>{{item.text}}</p>
             </div>
-            <span class="msg-more" id="msg-more">
+            <span class="msg-more" id="msg-more1" >
                 <ul>
                     <li>复制</li>
                     <li>转发</li>
                     <li>收藏</li>
-                    <li>删除</li>
+                    <li class="del"  @click="delMes($event)">删除</li>
                 </ul>
             </span>
         </section>
@@ -202,6 +202,25 @@
                         e.preventDefault()
                     }, false)
                 }
+        },
+            more1: {
+                bind(element, binding) {
+                    var startTx, startTy
+                    element.addEventListener('touchstart', function(e) {
+                        var msgMore = document.getElementById('msg-more1'),
+                            touches = e.changedTouches[0],
+                            startTx = touches.clientX,
+                            startTy = touches.clientY
+                            // 控制菜单的位置
+                        msgMore.style.left = ((startTx - 18) > 180 ? 180 : (startTx - 18)) + 'px'
+                        msgMore.style.top = (element.offsetTop - 33) + 'px'
+                        msgMore.style.display = "block"
+                        e.preventDefault()
+                    }, false)
+                    element.addEventListener('touchend', function(e) {
+                        e.preventDefault()
+                    }, false)
+                }
         }
         },
         methods: {
@@ -235,7 +254,20 @@
                      this.$router.push({path:'./details',query:{wxid:this.msgInfo.msg[i].href}})
                     }
                  }
-            }    
+            },
+            delMes(e){
+                var arr=document.getElementsByClassName('text1');
+                    for(var i=0;i<arr.length;i++){                  
+                        if(((arr[i].offsetTop-e.clientY)<30)&&(arr[i].offsetTop-e.clientY)>0){
+                            if(this.$route.query.group_num=='1'){
+                                this.$store.commit("delMessage",['1',arr[i].innerHTML]);
+                            }else{
+                                this.$store.commit("delMessage",[this.$route.query.mid,arr[i].innerHTML]);
+                            }
+                            document.getElementById("msg-more1").style.display="none";
+                        }                      
+                    }   
+            }
         }
     }
 </script>
