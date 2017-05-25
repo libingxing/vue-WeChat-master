@@ -1,4 +1,4 @@
-<template>
+<template>
     <div id="contact">
         <section>
             <div class="weui-cells_contact-head weui-cells weui-cells_access" style="margin-top:-1px">
@@ -59,7 +59,6 @@
             }
         },
         mounted() {
-            // mutations.js中有介绍
             this.$store.commit("toggleTipsStatus", -1)
         },
         activated() {

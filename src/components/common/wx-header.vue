@@ -54,13 +54,8 @@
 </template>
 <script>
     export default {
-        props: ["pageName"],
-        data() {
-            return {
-                // 暂且用不到
-                chatCount: true
-            }
-        }
+       props:['pageName']
+       
     }
 </script>
 <!--此处没有引用封装好的css文件，由于在app.vue中统一引入了，相当于子组件已经享有对应的css-->

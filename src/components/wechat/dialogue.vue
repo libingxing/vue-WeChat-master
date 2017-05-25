@@ -2,7 +2,6 @@
     <div class="dialogue" @click="hideMsgMore($event)">
         <header id="wx-header">
             <div class="other">
-
                 <!--群进入详情页-->
                 <router-link :to="{path:'/wechat/dialogue/dialogue-info',query: { msgInfo: msgInfo}}" tag="span" class="iconfont icon-chat-group" v-show="$route.query.group_num!=1"></router-link>
 

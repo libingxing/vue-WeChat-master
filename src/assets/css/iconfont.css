@@ -17,7 +17,7 @@
 }
 
 /**/
-.icon-tips-jia::before { content: "\e605"; }
+.icon-tips-jia::before { content: "\e503"; }
 .icon-return-arrow::before { content: "\e60a"; }
 .icon-tips-add-friend::before { content: "\e606"; }
 .icon-chat-set::before { content: "\e60e"; }
@@ -43,4 +43,5 @@
 .icon-dialogue-bar-menu::before{ content: "\e613"; }
 .icon-search::before{ content: "\e614"; }
 .icon-iphone-address::before{ content: "\e617"; }
+
 

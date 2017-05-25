@@ -91,11 +91,6 @@
             return {
                 showNickname: true
             }
-        },
-        mounted() {
-        this.$nextTick(function(){
-             //console.log(this.showNickname)
-        })
         }
     }
 </script>

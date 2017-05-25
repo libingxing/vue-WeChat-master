@@ -12,7 +12,7 @@
     import msgItem from "../wechat/msg-item"
     export default {
         components: {
-            msgItem
+            msgItem : msgItem
         },
         mixins: [window.mixin],
         data() {

@@ -2,16 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import OfficialAccounts from "./official-account" //存放所有关注的公众号
 import contact from './contacts' //存放所有联系人的数据
-import mutations from "./mutations"
+import mutations from "./mutations" //存放所有的修改函数
 import actions from "./actions"
 import getters from "./getters"
 
 //很重要,将Vuex挂载到Vue上面;
 Vue.use(Vuex)
-
-   
-    // 统一管理接口域名 
-let apiPublicDomain = '//vrapi.snail.com/'
 
 
 const state = {
@@ -20,15 +16,9 @@ const state = {
     allContacts: contact.contacts, //所有联系人
     OfficialAccounts: OfficialAccounts, //所有关注的公众号
     currentPageName: "微信", //用于在wx-header组件中显示当前页标题
-    //backPageName: "", //用于在返回按钮出 显示前一页名字 已遗弃
     headerStatus: true, //显示（true）/隐藏（false）wx-header组件
     tipsStatus: false, //控制首页右上角菜单的显示(true)/隐藏(false)
-    // 所有接口地址 后期需要
-    apiUrl: {
-        demo: apiPublicDomain + ""
-    },
     msgList: {
-        stickMsg: [], //置顶消息列表 后期需要
         baseMsg: [{ //普通消息列表
                 "mid": 1, //消息的id 唯一标识，重要
                 "type": "friend",

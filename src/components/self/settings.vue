@@ -9,7 +9,7 @@
                 <span>设置</span>
             </div>
         </header>
-        <section style="margin-top:45px;">
+        <section style="margin-top:55px;">
             <div class="weui-cells">
                 <router-link to="/self/settings/security" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">帐号与安全</div>

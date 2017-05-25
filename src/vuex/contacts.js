@@ -248,8 +248,9 @@ const contacts = [{ //昵称备注都有的朋友
 ]
 
 const contact = {
-    contacts
+    contacts 
 }
+
 contact.getUserInfo = function(wxid) {
     if (!wxid) {
         return;

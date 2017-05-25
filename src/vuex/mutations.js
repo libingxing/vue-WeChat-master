@@ -1,19 +1,8 @@
 const mutations = {
-    //切换语言 后期需要
-    switchLang(state, lang) {
-        state.currentLang = lang
-        Vue.config.lang = lang
-        document.cookie = "VR_LANG=" + lang + "; path=/;domain=.snail.com"
-            // location.reload()
-    },
     //设置当前页面名字
     setPageName(state, name) {
         state.currentPageName = name
     },
-    //设置前一页名字 已遗弃
-    // setBackPageName(state, name) {
-    //     state.backPageName = name
-    // },
     //当 search 组件全屏/非全屏时 切换公共头部状态
     toggleHeaderStatus(state, status) {
         state.headerStatus = status
@@ -35,28 +24,26 @@ const mutations = {
     minusNewMsg(state) {
         state.newMsgCount < 1 ? state.newMsgCount = 0 : state.newMsgCount--
     },
-    //将消息置顶 待完成
-    setMsgStick(state, mid) {
 
-    },
-    //取消置顶消息 待完成
-    cancelMsgStick(state, mid) {
-    },
     //添加个人消息
-    //注意对象数组深复制;
+    //注意对象数组深复制;此处若不使用深拷贝，将会导致指向同一个引用；
     //JSON.stringify将js=>json;
     //JSON.parse将json=>js;
     addMessage(state,arr){
         for(var i=0;i<state.msgList.baseMsg.length;i++){
             if(state.msgList.baseMsg[i].mid==arr[0]){
                 var array=[].concat(JSON.parse(JSON.stringify(state.msgList.baseMsg[i].msg)));
-                array[0].text=arr[1];
-                state.msgList.baseMsg[i].msg.push( array[0]);
+                if(array.length==0){
+                    //此处当消息清空之后，再次输入内容时，有问题，尚未解决;
+                }else{
+                    array[0].text=arr[1];
+                    state.msgList.baseMsg[i].msg.push( array[0]);
+                }
             }  
         }
       }, 
-      //删除个人消息
-      delMessage(state,arr){
+    //删除个人消息
+    delMessage(state,arr){
         for(var i=0;i<state.msgList.baseMsg.length;i++){
             if(state.msgList.baseMsg[i].mid==arr[0]){
                 var array=[].concat(JSON.parse(JSON.stringify(state.msgList.baseMsg[i].msg)));  
@@ -69,8 +56,9 @@ const mutations = {
             }  
         }
       },   
-      //添加群聊信息
-      addGroupMessage(state,arr){
+
+    //添加群聊信息
+    addGroupMessage(state,arr){
         for(var i=0;i<state.msgList.baseMsg.length;i++){
             if(state.msgList.baseMsg[i].mid==arr[0]){
                 for(var j in state.msgList.baseMsg[i].msg){
@@ -83,15 +71,27 @@ const mutations = {
             }  
         }
       },    
-      //修改store中official-account信息    
+      
+    //添加个人在群聊中的消息
     addOfficailMessage(state,str){
-        var array=[];
-        for(var i=0;i<state.msgList.officialMsg.length;i++){
-                array=[].concat(JSON.parse(JSON.stringify(state.msgList.officialMsg[i])));
+        for(var i in state.msgList.officialMsg){
+                var array=[].concat(JSON.parse(JSON.stringify(state.msgList.officialMsg[i])));
             }  
                 array[0].text=str;
                 state.msgList.officialMsg.push( array[0]);
-        }         
+        },
+    
+    //删除个人在群聊中的消息
+    delOfficialMessage(state,str){
+        for(var i in state.msgList.officialMsg){
+               if(state.msgList.officialMsg[i].text==str){
+                 var array=[].concat(JSON.parse(JSON.stringify(state.msgList.officialMsg[i])));
+                  array.text="";
+                  state.msgList.officialMsg.splice(i,1);
+               }
+                
+            }  
+        }      
             
 
 }

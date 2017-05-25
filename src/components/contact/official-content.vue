@@ -12,9 +12,9 @@
                     @click="$router.push({path:'./officialDetail',query:{wxid:official.wxid}})"></span>
                 </div>
             </header> 
-            <div class="_cover-content _effect" :class="{'_effect--30':decline}">
+            <div class="_cover-content _effect" :class="{'_effect--30':decline}" >
                 <section class="dialogue-section" >
-                    <div class="row clearfix" v-for="item in msgInfo" v-show="item.text!=''" style="margin-top:45px;">
+                    <div class="row clearfix" v-for="item in msgInfo" v-show="item.text!=''" style="margin-top:55px;" >
                 <img :src="item.headerUrl" class="header" style="width:35px;float:right;margin-right:-80px;display:block">
                 <p class="text1" v-more>{{item.text}}</p>
             </div>
@@ -23,7 +23,7 @@
                     <li>复制</li>
                     <li>转发</li>
                     <li>收藏</li>
-                    <li>删除</li>
+                    <li @click="delMsg($event)">删除</li>
                 </ul>
             </span>
                 </section>
@@ -137,6 +137,14 @@ export default {
                if((e.target.className!="msg-more")&&e.target.className!="text1"){
                  document.getElementById("msg-more").style.display="none";
                }
+            },
+             delMsg(e){
+                    var arr=document.getElementsByClassName('text1');
+                    for(var i=0;i<arr.length;i++){                  
+                        if(((arr[i].offsetTop-e.clientY)<30)&&(arr[i].offsetTop-e.clientY)>0){
+                            this.$store.commit("delOfficialMessage",arr[i].innerHTML);
+                        }                      
+                    }
             }
 
     },
